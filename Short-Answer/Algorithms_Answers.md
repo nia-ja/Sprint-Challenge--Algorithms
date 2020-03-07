@@ -38,4 +38,6 @@ c)
 
 ## Exercise II
 
+A Binary Search should work for this task. Start with the middle floor and drop an egg. If it breaks all floors above can be ignored. Then move your low, mid and high points to test the bottom half. If at the new mid it breaks, you rule out the upper floors and vice versa. Repeat until we find a floor that the egg doesn't break at at and the floor directly above does break.
 
+Best case we could run at O(1). Worst case we'll end up somewhere at O(log(n))
