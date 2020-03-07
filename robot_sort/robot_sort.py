@@ -96,9 +96,54 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
 
+        """
+        # When light off return sorted list
+        """
+
+        # Set light "ON"
+        self.set_light_on()
+
+        # While light is "ON"
+        while self.light_is_on():
+            # Set light "OFF"
+            self.set_light_off()
+
+            if self.can_move_left() is False:  # check to see if you can move left
+                # if you can't check for swaping item
+                # Swap list[0] (= pick up first item)
+                self.swap_item()
+
+            # While can move left
+            while self.can_move_left():
+                self.move_left()  # move left :)
+                
+                # Until you hit the position where there are no items 
+                if self.compare_item() is None:  # you are in position 0 and holding an item you can swap otherwise break
+                    self.swap_item()
+                    break
+
+            # While can move right 
+            while self.can_move_right():
+                self.move_right()
+
+                # if you cant move right and there is nothing to compare. turn light on robot off and break...end of list
+                if self.can_move_right() is False and self.compare_item() is None:
+                    self.set_light_off()
+                    # Break comparing as all items sorted
+                    break
+
+                # Compare items
+                # pick up item if greater than or you aren't holding an item yet
+                # If the held item's value is greater, return 1
+                if self.compare_item() is None or self.compare_item() == 1:
+                    # Swap items
+                    self.swap_item()
+                    # Set light "ON"
+                    self.set_light_on()
+
+        # When light off return sorted list
+        return  self._list
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
